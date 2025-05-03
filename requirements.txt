@@ -10,6 +10,8 @@ faker
 reportlab
 logging
 argparse
-import zipfile
-import rarfile
-import py7zr
+sqlite3
+pathlib
+zipfile
+rarfile
+py7zr

@@ -46,11 +46,11 @@ def gen_files():
     generate_docx("storage/document1.docx")
     generate_xlsx("storage/data.xlsx")
     generate_pdf("storage/report.pdf")
-    print("docs generated")
+    print("Документы сгенерированы!")
     temp_files = ["storage/document2.docx", "storage/data2.xlsx", "storage/report2.pdf"]
     generate_docx(temp_files[0])
     generate_xlsx(temp_files[1])
     generate_pdf(temp_files[2])
     create_archive("storage/archive.zip", temp_files)
-    print("archive created")
+    print("Архив добавлен.")
 
