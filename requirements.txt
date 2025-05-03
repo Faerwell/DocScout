@@ -1,0 +1,10 @@
+python-docx
+openpyxl
+PyPDF2
+textract
+rarfile
+py7zr
+pandas
+sqlalchemy
+faker
+reportlab
