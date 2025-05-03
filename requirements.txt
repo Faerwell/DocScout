@@ -8,3 +8,8 @@ pandas
 sqlalchemy
 faker
 reportlab
+logging
+argparse
+import zipfile
+import rarfile
+import py7zr

@@ -1,38 +1,38 @@
-import os
-import textract
-import pandas as pd
-from zipfile import ZipFile
-from rarfile import RarFile
-from py7zr import SevenZipFile
+import logging
+import argparse
 
+from DocumentCrawler import DocumentCrawler
 from generator import gen_files
 
+# Настройка логирования
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
 
-def extract_text(file_path):
-    try:
-        return textract.process(file_path).decode("utf-8")
-    except:
-        return ""
 
-def process_archive(archive_path, extract_dir="temp"):
-    # Распаковка ZIP/RAR/7Z и обработка вложенных файлов
-    ...
 
-def crawl(root_dir, output_csv="output.csv"):
-    data = []
-    for root, _, files in os.walk(root_dir):
-        for file in files:
-            file_path = os.path.join(root, file)
-            if file.endswith((".zip", ".rar", ".7z")):
-                process_archive(file_path)
-            else:
-                content = extract_text(file_path)
-                data.append({
-                    "file_path": file_path,
-                    "content": content
-                })
-    pd.DataFrame(data).to_csv(output_csv, index=False)
 
 if __name__ == "__main__":
+    # Генерация файлов и архива
     gen_files()
-    #crawl("storage")
+
+    parser = argparse.ArgumentParser(
+        description='Crawler для сканирования документов и архивов'
+    )
+    parser.add_argument(
+        '-i', '--input',
+        required=True,
+        help='Путь к сканируемой директории'
+    )
+    parser.add_argument(
+        '-o', '--output',
+        default='output.csv',
+        help='Путь к выходному CSV-файлу'
+    )
+
+    args = parser.parse_args()
+    crawler = DocumentCrawler()
+    crawler.crawl(args.input, args.output)
+
+
